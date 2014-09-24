@@ -67,6 +67,7 @@
     const char *dbUtfString = [dbFilePath UTF8String];
     if (sqlite3_open(dbUtfString, &database)==SQLITE_OK)
     {
+       
         NSString *name = _studentNameTF.text;
         NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
         NSString *deparment = _studentDepartmentTF.text;

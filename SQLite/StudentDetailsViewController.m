@@ -32,7 +32,9 @@
     [_studentID setEnabled:NO];
     [_studentDepartment setEnabled:NO];
     [_studentAge setEnabled:NO];
-
+    
+    
+    
     
     [self getStudentsDetails];
     
@@ -106,6 +108,60 @@
     return dbpath;
     
 }
+
+-(IBAction)editButtonClicked:(id)sender{
+    
+    
+   [_editButton setTitle:@"Update" forState:UIControlStateNormal];
+    
+    [_studentName setEnabled:YES];
+    [_studentDepartment setEnabled:YES];
+    [_studentAge setEnabled:YES];
+    
+    if ([_editButton.titleLabel.text isEqual:@"Update"]) {
+        NSString *dbFilePath =[self getDBFileFromDocumentDirectory];
+        const char *dbUtfString = [dbFilePath UTF8String];
+        if (sqlite3_open(dbUtfString, &database)==SQLITE_OK)
+        {
+            NSString *selectQuery = [NSString stringWithFormat:@"Update Student set StudentName='%@',Department='%@',Age=%d where StudentID='%@'",_studentName.text,_studentDepartment.text,[_studentAge.text intValue],_identification];
+            const char *queryUtf8 = [selectQuery UTF8String];
+            sqlite3_stmt *statment;
+            if (sqlite3_prepare(database, queryUtf8, -1, &statment, NULL)==SQLITE_OK )
+            {
+                
+                
+                if(sqlite3_step(statment)==SQLITE_DONE){
+                    NSLog(@"Updated Successfully");
+                    [self.secondDelegate updateData];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                }
+                
+            }
+            
+            sqlite3_finalize(statment);
+        }
+        sqlite3_close(database);
+        
+
+    }
+    
+   
+    
+  
+
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [_studentAge resignFirstResponder];
+    
+    return YES;
+
+
+}
+
+
 
 
 @end

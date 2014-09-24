@@ -26,7 +26,7 @@
 		A802A4EC19D00EFF00D92660 /* StudentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A802A4EB19D00EFF00D92660 /* StudentDetailsViewController.m */; };
 		A802A4F119D0160F00D92660 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = A802A4F019D0160F00D92660 /* Student.m */; };
 		A802A4F519D031E300D92660 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A802A4F419D031E300D92660 /* libsqlite3.0.dylib */; };
-		A8407C1B19D17B3800348948 /* StudentDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A8407C1A19D17B3800348948 /* StudentDB.sqlite */; };
+		A8D8E4E919D28DC8009693DE /* StudentDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A8D8E4E819D28DC8009693DE /* StudentDB.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 		A802A4EF19D0160F00D92660 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Student.h; path = SQLite/Student.h; sourceTree = "<group>"; };
 		A802A4F019D0160F00D92660 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Student.m; path = SQLite/Student.m; sourceTree = "<group>"; };
 		A802A4F419D031E300D92660 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		A8407C1A19D17B3800348948 /* StudentDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = StudentDB.sqlite; path = SQLite/StudentDB.sqlite; sourceTree = "<group>"; };
+		A8D8E4E819D28DC8009693DE /* StudentDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = StudentDB.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +190,7 @@
 		A8407C1D19D1821800348948 /* SQLite Database */ = {
 			isa = PBXGroup;
 			children = (
-				A8407C1A19D17B3800348948 /* StudentDB.sqlite */,
+				A8D8E4E819D28DC8009693DE /* StudentDB.sqlite */,
 			);
 			name = "SQLite Database";
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 			files = (
 				A802A4C319D00E1800D92660 /* Main_iPad.storyboard in Resources */,
 				A802A4C819D00E1800D92660 /* Images.xcassets in Resources */,
-				A8407C1B19D17B3800348948 /* StudentDB.sqlite in Resources */,
+				A8D8E4E919D28DC8009693DE /* StudentDB.sqlite in Resources */,
 				A802A4C019D00E1800D92660 /* Main_iPhone.storyboard in Resources */,
 				A802A4B719D00E1800D92660 /* InfoPlist.strings in Resources */,
 			);

@@ -10,7 +10,7 @@
 #import <sqlite3.h>
 #import "Student.h"
 
-@interface StudentDetailsTableViewController : UITableViewController{
+@interface StudentDetailsTableViewController : UITableViewController<UIAlertViewDelegate>{
 
     sqlite3 *database;
 

@@ -13,12 +13,16 @@
 @interface StudentDetailsTableViewController (){
 
     NSMutableArray *studentObjectsArray;
-
+   
 }
 
 @end
 
-@implementation StudentDetailsTableViewController
+@implementation StudentDetailsTableViewController{
+
+    NSString *identification;
+    NSIndexPath *indexPathvariable;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -78,6 +82,40 @@
 
 
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+
+    
+    
+    indexPathvariable=indexPath;
+
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        
+        UIAlertView *deleteWarning=[[UIAlertView alloc] initWithTitle:@"Delete Warning!!" message:@"Are you sure want to delete data from database?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+        
+        
+        [deleteWarning show];
+        
+        Student *tempObject=[studentObjectsArray objectAtIndex:indexPath.row];
+        identification=tempObject.studentID;
+        
+        
+       
+        
+        
+        [self.tableView reloadData];
+       
+    } else {
+        NSLog(@"Unhandled editing style! %d", editingStyle);
+    }
+
+
+}
+
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -97,6 +135,7 @@
         
         
         StudentDetailsViewController *StudentDetails=[segue destinationViewController];
+        StudentDetails.secondDelegate=self;
         NSIndexPath *selectedIndexpath=[self.tableView indexPathForSelectedRow];
         Student *student=[studentObjectsArray objectAtIndex:selectedIndexpath.row];
         
@@ -182,12 +221,44 @@
     
 }
 
--(void)retrieveDetails{
 
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        
+        [studentObjectsArray removeObjectAtIndex:indexPathvariable.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPathvariable] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSString *dbFilePath =[self getDBFileFromDocumentDirectory];
+        const char *dbUtfString = [dbFilePath UTF8String];
+        if (sqlite3_open(dbUtfString, &database)==SQLITE_OK)
+        {
+            NSString *selectQuery = [NSString stringWithFormat:@"delete from  Student where StudentID='%@'",identification];
+            const char *queryUtf8 = [selectQuery UTF8String];
+            sqlite3_stmt *statment;
+            if (sqlite3_prepare(database, queryUtf8, -1, &statment, NULL)==SQLITE_OK )
+            {
+                
+                
+                if(sqlite3_step(statment)==SQLITE_ROW)
+                {
+                    NSLog(@"Deleted Successfully");
+                    
+                }
+                
+                [self.tableView reloadData];
+                
+                
+            }
+            sqlite3_finalize(statment);
+        }
+        sqlite3_close(database);
+        
 
-
-
+        
+        
+    }
+   
 }
 
 
